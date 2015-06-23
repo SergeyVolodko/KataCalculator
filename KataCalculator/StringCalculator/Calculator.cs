@@ -8,7 +8,7 @@ namespace StringCalculator
         public int Add(string numbers)
         {
             return numbers
-                .Split(",".ToArray(), StringSplitOptions.RemoveEmptyEntries)
+                .Split(new [] {",", "\n"}, StringSplitOptions.RemoveEmptyEntries)
                 .Select(s => int.Parse(s))
                 .Sum();
         }

@@ -52,5 +52,19 @@ namespace KataCalculator.Tests
 
             Assert.Equal(expected, actual);
         }
+
+        [Theory, CalculatorTestConventions]
+        public void AddWithLineBreakAndComasAsDelimitersRetunsCorrectResult(
+            Calculator sut,
+            int x,
+            int y,
+            int z)
+        {
+            var numbers = string.Format("{0}\n{1},{2}", x, y, z);
+
+            var actual = sut.Add(numbers);
+
+            Assert.Equal(x + y + z, actual);
+        }
     }
 }
