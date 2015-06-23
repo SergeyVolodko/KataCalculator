@@ -1,4 +1,6 @@
-﻿using StringCalculator;
+﻿using System.Linq;
+using Ploeh.AutoFixture;
+using StringCalculator;
 using Xunit;
 using Xunit.Extensions;
 
@@ -33,6 +35,22 @@ namespace KataCalculator.Tests
             var numbers = string.Join(",", x, y);
             var actual = sut.Add(numbers);
             Assert.Equal(x + y, actual);
+        }
+
+        [Theory, CalculatorTestConventions]
+        public void AddAnyAmountOfNumbersReturnsCorrectResult(
+            Calculator sut, 
+            int count,
+            Generator<int> generator)
+        {
+            var integers = generator.Take(count + 2).ToArray();
+            var numbers = string.Join(",", integers);
+            
+            var actual = sut.Add(numbers);
+
+            var expected = integers.Sum();
+
+            Assert.Equal(expected, actual);
         }
     }
 }
