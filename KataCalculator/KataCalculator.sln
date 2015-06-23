@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KataCalculator.Tests", "KataCalculator.Tests\KataCalculator.Tests.csproj", "{ECAEF52E-3F1E-4478-A6DF-BB49BE817C51}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringCalculator", "StringCalculator\StringCalculator.csproj", "{40A4FCAA-ECD8-45A0-8DED-FA8CBC3B6536}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{ECAEF52E-3F1E-4478-A6DF-BB49BE817C51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECAEF52E-3F1E-4478-A6DF-BB49BE817C51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECAEF52E-3F1E-4478-A6DF-BB49BE817C51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40A4FCAA-ECD8-45A0-8DED-FA8CBC3B6536}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40A4FCAA-ECD8-45A0-8DED-FA8CBC3B6536}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40A4FCAA-ECD8-45A0-8DED-FA8CBC3B6536}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40A4FCAA-ECD8-45A0-8DED-FA8CBC3B6536}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
