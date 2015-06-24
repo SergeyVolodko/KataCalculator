@@ -66,5 +66,29 @@ namespace KataCalculator.Tests
 
             Assert.Equal(x + y + z, actual);
         }
+
+        [Theory, CalculatorTestConventions]
+        public void AddLineWithCustomDelimeterReturnsCorrectResult(
+            Calculator sut,
+            Generator<char> charGenerator,
+            int count,
+            Generator<int> intGenerator)
+        {
+            int dummy;
+            var delimeter = charGenerator
+                .Where(c => !int.TryParse(c.ToString(), out dummy))
+                .First();
+            var integers = intGenerator.Take(count).ToArray();
+            var numbers = string.Format(
+                "//{0}\n{1}",
+                delimeter,
+                string.Join(delimeter.ToString(), integers));
+
+            var actual = sut.Add(numbers);
+
+            var expected = integers.Sum();
+
+            Assert.Equal(expected, actual);
+        }
     }
 }
