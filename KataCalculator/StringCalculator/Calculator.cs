@@ -12,7 +12,11 @@ namespace StringCalculator
 
             if (numbers.StartsWith("//"))
             {
-                delimeters = new[] { numbers.Skip(2).First().ToString() };
+                if (numbers.StartsWith("//["))
+                    delimeters = new[] { numbers.Substring(3, numbers.IndexOf(']') - 3) };
+                else
+                    delimeters = new[] { numbers.Skip(2).First().ToString() };
+
                 numbersOnly = 
                     new string(numbers.SkipWhile(c => c != '\n').ToArray());
             }

@@ -125,5 +125,25 @@ namespace KataCalculator.Tests
 
             Assert.Equal(x, actual);
         }
+
+        [Theory, CalculatorTestConventions]
+        public void AddLineWithCustomDelimeterStringReturnsCorrectResult(
+            Calculator sut,
+            string delimeter,
+            int count,
+            Generator<int> intGenerator)
+        {
+            var integers = intGenerator.Take(count).ToArray();
+            var numbers = string.Format(
+                "//[{0}]\n{1}",
+                delimeter,
+                string.Join(delimeter, integers));
+
+            var actual = sut.Add(numbers);
+
+            var expected = integers.Sum();
+
+            Assert.Equal(expected, actual);
+        }
     }
 }
