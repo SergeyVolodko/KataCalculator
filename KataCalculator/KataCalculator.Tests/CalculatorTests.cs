@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Ploeh.AutoFixture;
 using StringCalculator;
 using Xunit;
@@ -77,6 +78,7 @@ namespace KataCalculator.Tests
             int dummy;
             var delimeter = charGenerator
                 .Where(c => !int.TryParse(c.ToString(), out dummy))
+                .Where(c => c != '-')
                 .First();
             var integers = intGenerator.Take(count).ToArray();
             var numbers = string.Format(
@@ -89,6 +91,23 @@ namespace KataCalculator.Tests
             var expected = integers.Sum();
 
             Assert.Equal(expected, actual);
+        }
+
+        [Theory, CalculatorTestConventions]
+        public void AddLineWithNegativeNumbersThrowsCorrectException(
+            Calculator sut,
+            int x,
+            int y,
+            int z)
+        {
+            var numbers = string.Join(",", -x, y, -z);
+
+            var e = Assert.Throws<ArgumentOutOfRangeException>(
+                () => sut.Add(numbers));
+
+            Assert.True(e.Message.StartsWith("Negatives not allowed."));
+            Assert.Contains((-x).ToString(), e.Message);
+            Assert.Contains((-z).ToString(), e.Message);
         }
     }
 }
