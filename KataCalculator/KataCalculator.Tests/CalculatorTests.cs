@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Ploeh.AutoFixture;
 using StringCalculator;
 using Xunit;
@@ -108,6 +109,21 @@ namespace KataCalculator.Tests
             Assert.True(e.Message.StartsWith("Negatives not allowed."));
             Assert.Contains((-x).ToString(), e.Message);
             Assert.Contains((-z).ToString(), e.Message);
+        }
+
+        [Theory, CalculatorTestConventions]
+        public void AddIgnoresBigNumber(
+            Calculator sut,
+            int smallSeed,
+            int bigSeed)
+        {
+            var x = Math.Min(smallSeed, 1000);
+            var y = bigSeed + 1000;
+            var numbers = string.Join(",", x, y);
+
+            var actual = sut.Add(numbers);
+
+            Assert.Equal(x, actual);
         }
     }
 }

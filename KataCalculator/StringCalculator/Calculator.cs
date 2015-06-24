@@ -30,7 +30,7 @@ namespace StringCalculator
                         "Negatives not allowed. Found: {0}.",
                         string.Join(", ", negatives)));
 
-            return integers.Sum();
+            return integers.Where(i => i <= 1000).Sum();
         }
     }
 }
