@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace StringCalculator
@@ -13,7 +14,7 @@ namespace StringCalculator
             if (numbers.StartsWith("//"))
             {
                 if (numbers.StartsWith("//["))
-                    delimeters = new[] { numbers.Substring(3, numbers.IndexOf(']') - 3) };
+                    delimeters = GetDelimeters(numbers);
                 else
                     delimeters = new[] { numbers.Skip(2).First().ToString() };
 
@@ -35,6 +36,21 @@ namespace StringCalculator
                         string.Join(", ", negatives)));
 
             return integers.Where(i => i <= 1000).Sum();
+        }
+
+        private static string[] GetDelimeters(string numbers)
+        {
+            var envelope = numbers.Substring(2, numbers.IndexOf("]\n") - 1);
+            var s = envelope;
+            var delimeters = new List<string>();
+            while (s != "")
+            {
+                var closingBracketPosition = s.IndexOf("]");
+                delimeters.Add(s.Substring(1, closingBracketPosition - 1));
+                s = s.Substring(closingBracketPosition + 1);
+            }
+
+            return delimeters.ToArray();
         }
     }
 }

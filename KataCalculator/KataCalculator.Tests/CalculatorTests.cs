@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using Ploeh.AutoFixture;
 using StringCalculator;
 using Xunit;
@@ -142,6 +141,30 @@ namespace KataCalculator.Tests
             var actual = sut.Add(numbers);
 
             var expected = integers.Sum();
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory, CalculatorTestConventions]
+        public void AddLineWithMultipleCustomDelimeterStringsReturnsCorrectResult(
+            Calculator sut,
+            string delimeter1,
+            string delimeter2,
+            int x,
+            int y,
+            int z)
+        {
+            var numbers = string.Format(
+               "//[{0}][{1}]\n{2}{0}{3}{1}{4}",
+               delimeter1,
+               delimeter2,
+               x,
+               y,
+               z);
+
+            var actual = sut.Add(numbers);
+
+            var expected = x + y + z;
 
             Assert.Equal(expected, actual);
         }
